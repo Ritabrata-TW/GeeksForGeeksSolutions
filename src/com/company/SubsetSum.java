@@ -42,7 +42,6 @@ public class SubsetSum {
             }
         }
     }
-
     private static boolean checkEquality(int[] numbers, int index, int remainingForBucket1, int numberOfElements,
         Map<Integer, Boolean>[] map) {
 
@@ -65,11 +64,9 @@ public class SubsetSum {
             return true;
         }
 
-        boolean withThisNumberInBucket1 = checkEquality(numbers, index + 1, remainingForBucket1 + numbers[index], numberOfElements, map);
-        boolean withoutThisNumberInBucket1 = checkEquality(numbers, index + 1, remainingForBucket1, numberOfElements, map);
-
-        boolean possible = withThisNumberInBucket1 || withoutThisNumberInBucket1;
+        boolean possible = checkEquality(numbers, index + 1, remainingForBucket1 - numbers[index], numberOfElements, map) || checkEquality(numbers, index + 1, remainingForBucket1, numberOfElements, map);
         mapForIndex.put(remainingForBucket1, possible);
         return possible;
     }
+
 }
